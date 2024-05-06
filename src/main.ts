@@ -1,11 +1,12 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 //Propio
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const logger = new Logger('NEST-MICROSERVICIOS');
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -17,7 +18,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api'); // Establece el prefijo global '/api' para todos los endpoints
 
   await app.listen(process.env.PORT || 9999, () => {
-    console.log(
+    logger.debug(
       `👍El server esta arriba en el puerto: ${process.env.PORT || 9999} 👍💪`,
     );
   });

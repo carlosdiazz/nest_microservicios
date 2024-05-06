@@ -14,6 +14,7 @@ import {
 import { config, validationENV } from './../config/config';
 
 import { ProductsModule, UsersModule } from '../components';
+import { PrismaModule } from './../database';
 
 const isProduction = process.env.STATE === 'PROD';
 
@@ -67,6 +68,9 @@ const apolloPlugin = isProduction
 
     //?Modulo Products
     ProductsModule,
+
+    //? Databse
+    PrismaModule,
   ],
 })
 export class AppModule {}
