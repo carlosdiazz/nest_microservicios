@@ -9,17 +9,11 @@ import {
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginLandingPageProductionDefault,
 } from '@apollo/server/plugin/landingPage/default';
-import { NestjsGrammyModule } from '@grammyjs/nestjs';
 
 //Propio
 import { config, validationENV } from './../config/config';
 
-import {
-  LotenetModule,
-  UsersModule,
-  Telegramv2Module,
-} from './../components/components';
-import { AxiosModule } from './../common/common';
+import { UsersModule } from './../components/components';
 
 const isProduction = process.env.STATE === 'PROD';
 
@@ -47,16 +41,6 @@ const apolloPlugin = isProduction
       },
     }),
 
-    //Modulo para Telegram v2
-    NestjsGrammyModule.forRootAsync({
-      inject: [config.KEY],
-
-      useFactory: (configService: ConfigType<typeof config>) => ({
-        token: configService.TELEGRAM_TOKEN,
-        // middlewares: [session()],
-      }),
-    }),
-
     //? Modulo Http
     HttpModule.registerAsync({
       useFactory: () => ({
@@ -80,15 +64,6 @@ const apolloPlugin = isProduction
 
     //?Modulo de Usuarios
     UsersModule,
-
-    //?Modulo Lotenet
-    LotenetModule,
-
-    //?Modulo de Telegram
-    Telegramv2Module,
-
-    //?Modulo Axios
-    AxiosModule,
   ],
 })
 export class AppModule {}

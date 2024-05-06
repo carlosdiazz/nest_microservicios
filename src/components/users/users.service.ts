@@ -5,8 +5,9 @@ import { Model } from 'mongoose';
 //Propio
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
-import { FindOneDto } from './../../common/common';
+
 import { CreateUserDto } from './dto/create-user.dto';
+import { FindOneDto } from './../../common/common';
 
 @Injectable()
 export class UsersService {
