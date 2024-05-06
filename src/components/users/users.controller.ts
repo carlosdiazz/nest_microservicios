@@ -2,7 +2,7 @@ import { Controller, Get, Param } from '@nestjs/common';
 
 //Propio
 import { UsersService } from './users.service';
-import { FindOneDto } from './../../common/common';
+import { FindOneDto } from '../../common';
 
 @Controller('users')
 export class UsersController {

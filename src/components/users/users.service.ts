@@ -7,7 +7,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
 
 import { CreateUserDto } from './dto/create-user.dto';
-import { FindOneDto } from './../../common/common';
+import { FindOneDto } from '../../common';
 
 @Injectable()
 export class UsersService {

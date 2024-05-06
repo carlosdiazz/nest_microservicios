@@ -13,7 +13,7 @@ import {
 //Propio
 import { config, validationENV } from './../config/config';
 
-import { UsersModule } from './../components/components';
+import { ProductsModule, UsersModule } from '../components';
 
 const isProduction = process.env.STATE === 'PROD';
 
@@ -64,6 +64,9 @@ const apolloPlugin = isProduction
 
     //?Modulo de Usuarios
     UsersModule,
+
+    //?Modulo Products
+    ProductsModule,
   ],
 })
 export class AppModule {}
