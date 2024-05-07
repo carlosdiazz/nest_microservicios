@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 //?Propio
@@ -30,20 +31,20 @@ export class ProductsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Product> {
-    return await this.productsService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Product> {
+    return await this.productsService.findOne(id);
   }
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateProductDto: UpdateProductDto,
   ): Promise<Product> {
-    return await this.productsService.update(+id, updateProductDto);
+    return await this.productsService.update(id, updateProductDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<ResponsePopio> {
-    return await this.productsService.remove(+id);
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<ResponsePopio> {
+    return await this.productsService.remove(id);
   }
 }

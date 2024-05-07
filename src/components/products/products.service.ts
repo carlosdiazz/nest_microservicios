@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { CreateProductDto, Product, UpdateProductDto } from '..';
 import { PaginationDto, ProductMock1, ResponsePopio } from './../../common';
@@ -18,18 +18,25 @@ export class ProductsService {
   }
 
   async findOne(id: number): Promise<Product> {
-    console.log(id);
-    return ProductMock1;
+    const product = await this.repository.findOne(id);
+    if (!product) {
+      console.log(product);
+      throw new NotFoundException(MESSAGE.ESTA_ENTIDAD_NO_EXISTE);
+    }
+    return product;
   }
 
   async update(
     id: number,
     updateProductDto: UpdateProductDto,
   ): Promise<Product> {
-    return ProductMock1;
+    await this.findOne(id);
+    return await this.repository.update(id, updateProductDto);
   }
 
   async remove(id: number): Promise<ResponsePopio> {
+    await this.findOne(id);
+    await this.repository.remove(id);
     return {
       message: MESSAGE.SE_ELIMINO_CORRECTAMENTE_ESTA_ENTIDAD,
       statusCode: 200,

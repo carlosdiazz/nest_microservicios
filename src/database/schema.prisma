@@ -19,4 +19,8 @@ model Product {
   price     Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  available Boolean @default(true)
+
+  //Hago un in dice para qeu sea mas rapido
+  @@index([available])
 }
