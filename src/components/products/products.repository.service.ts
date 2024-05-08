@@ -36,9 +36,10 @@ export class ProductsRepositoryService {
     id: number,
     updateProductDto: UpdateProductDto,
   ): Promise<Product> {
+    const { id: __, ...data } = updateProductDto;
     return await this.prisma.product.update({
       where: { id },
-      data: updateProductDto,
+      data: data,
     });
   }
 

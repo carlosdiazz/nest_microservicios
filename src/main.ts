@@ -3,11 +3,21 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 
 //Propio
 import { AppModule } from './app/app.module';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { envs } from './config/envs';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
   const logger = new Logger('NEST-MICROSERVICIOS');
-
+  //const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AppModule,
+    {
+      transport: Transport.TCP,
+      options: {
+        port: envs.PORT,
+      },
+    },
+  );
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // Remueve todo lo que no está incluído en los DTOs
@@ -15,12 +25,9 @@ async function bootstrap() {
     }),
   );
 
-  app.setGlobalPrefix('api'); // Establece el prefijo global '/api' para todos los endpoints
+  //app.setGlobalPrefix('api'); // Establece el prefijo global '/api' para todos los endpoints
 
-  await app.listen(process.env.PORT || 9999, () => {
-    logger.debug(
-      `👍El server esta arriba en el puerto: ${process.env.PORT || 9999} 👍💪`,
-    );
-  });
+  await app.listen();
+  logger.debug(`Products Microservice running on port ${envs.PORT}`);
 }
 bootstrap();

@@ -6,6 +6,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   private readonly logger = new Logger('PrismaService');
   async onModuleInit() {
     await this.$connect();
-    this.logger.warn('Databse Connect');
+    this.logger.debug('Databse Connect');
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
 
 import { CreateProductDto, Product, UpdateProductDto } from '..';
 import { PaginationDto, ProductMock1, ResponsePopio } from './../../common';
@@ -20,8 +21,7 @@ export class ProductsService {
   async findOne(id: number): Promise<Product> {
     const product = await this.repository.findOne(id);
     if (!product) {
-      console.log(product);
-      throw new NotFoundException(MESSAGE.ESTA_ENTIDAD_NO_EXISTE);
+      throw new RpcException(MESSAGE.ESTA_ENTIDAD_NO_EXISTE);
     }
     return product;
   }
