@@ -49,6 +49,7 @@ export class ProductsController {
     //@Body() updateProductDto: UpdateProductDto,
     @Payload() updateProductDto: UpdateProductDto,
   ): Promise<Product> {
+    console.log(updateProductDto);
     return await this.productsService.update(
       updateProductDto.id,
       updateProductDto,
