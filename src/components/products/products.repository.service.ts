@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from './../../database';
 import { Product } from './entities/product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { PaginationDto } from './../../common';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class ProductsRepositoryService {
@@ -57,5 +58,25 @@ export class ProductsRepositoryService {
     //  console.log(e);
     //  return false;
     //}
+  }
+
+  async validateProducts(ids: number[]): Promise<Product[]> {
+    //Aqui va a devolver todos los productos que exista en el arreglo del id que mando
+    const products = await this.prisma.product.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+
+    if (products.length !== ids.length) {
+      throw new RpcException({
+        message: 'Un producto no existe',
+        status: HttpStatus.BAD_REQUEST,
+      });
+    }
+
+    return products;
   }
 }

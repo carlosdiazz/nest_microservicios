@@ -7,7 +7,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { envs } from './config/envs';
 
 async function bootstrap() {
-  const logger = new Logger('NEST-MICROSERVICIOS');
+  const logger = new Logger('PRODUCTS-MAIN');
   //const app = await NestFactory.create(AppModule);
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
@@ -28,6 +28,6 @@ async function bootstrap() {
   //app.setGlobalPrefix('api'); // Establece el prefijo global '/api' para todos los endpoints
 
   await app.listen();
-  logger.debug(`Products Microservice running on port ${envs.PORT}`);
+  logger.debug(`PRODUCTS-MS running on port ${envs.PORT}`);
 }
 bootstrap();

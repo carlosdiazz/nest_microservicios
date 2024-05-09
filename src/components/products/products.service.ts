@@ -46,4 +46,9 @@ export class ProductsService {
       error: null,
     };
   }
+
+  async validateProducts(ids: number[]) {
+    ids = Array.from(new Set(ids));
+    return await this.repository.validateProducts(ids);
+  }
 }
