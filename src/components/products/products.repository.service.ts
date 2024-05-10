@@ -67,9 +67,9 @@ export class ProductsRepositoryService {
         id: {
           in: ids,
         },
+        available: true,
       },
     });
-
     if (products.length !== ids.length) {
       throw new RpcException({
         message: 'Un producto no existe',
