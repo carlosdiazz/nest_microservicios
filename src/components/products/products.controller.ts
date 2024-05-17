@@ -1,14 +1,4 @@
-import {
-  Controller,
-  //Get,
-  //Post,
-  //Body,
-  //Patch,
-  //Param,
-  //Delete,
-  //Query,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, ParseIntPipe } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
 //?Propio
@@ -20,6 +10,7 @@ import {
 import { Product } from './entities/product.entity';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PaginationDto, ResponsePopio } from './../../common';
+
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}

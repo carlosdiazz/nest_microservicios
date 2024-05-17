@@ -41,6 +41,7 @@
     "joi": "^17.13.1",
     "moment": "^2.30.1",
     "mongoose": "^8.3.3",
+    "nats": "^2.25.0",
     "node-cron": "^3.0.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
