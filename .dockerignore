@@ -2,8 +2,12 @@ node_modules
 npm-debug.log
 dist
 node_modules/
-package-lock.json
 yarn.lock
 npm-debug.log
 .env
 .env.local
+
+dist/
+node_modules/
+.env
+.vscode/

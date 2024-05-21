@@ -33,14 +33,14 @@ const apolloPlugin = isProduction
     }),
 
     //?Modulo de MongoDb
-    MongooseModule.forRootAsync({
-      inject: [config.KEY],
-      useFactory: (configService: ConfigType<typeof config>) => {
-        return {
-          uri: configService.URI_MONGO,
-        };
-      },
-    }),
+    //MongooseModule.forRootAsync({
+    //  inject: [config.KEY],
+    //  useFactory: (configService: ConfigType<typeof config>) => {
+    //    return {
+    //      uri: configService.URI_MONGO,
+    //    };
+    //  },
+    //}),
 
     //? Modulo Http
     HttpModule.registerAsync({
@@ -51,20 +51,20 @@ const apolloPlugin = isProduction
     }),
 
     //?Modulo de Graphql
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      playground: false,
-      //autoSchemaFile: true,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      persistedQueries: false,
-      fieldResolverEnhancers: ['interceptors'],
-      plugins: [apolloPlugin()],
-      context: ({ req }) => ({ req }),
-      introspection: isProduction ? false : true,
-    }),
+    //GraphQLModule.forRoot<ApolloDriverConfig>({
+    //  driver: ApolloDriver,
+    //  playground: false,
+    //  //autoSchemaFile: true,
+    //  autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    //  persistedQueries: false,
+    //  fieldResolverEnhancers: ['interceptors'],
+    //  plugins: [apolloPlugin()],
+    //  context: ({ req }) => ({ req }),
+    //  introspection: isProduction ? false : true,
+    //}),
 
     //?Modulo de Usuarios
-    UsersModule,
+    //UsersModule,
 
     //?Modulo Products
     ProductsModule,
